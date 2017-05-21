@@ -1,7 +1,7 @@
-import urllib2
-import urllib
+import urllib.request, urllib.error, urllib.parse
+import urllib.request, urllib.parse, urllib.error
 import re
-from exceptions import *
+from .exceptions import *
 
 __version__ = "1.0"
 __author__ = "Ferdinand E. Silva"
@@ -23,10 +23,10 @@ class Jenereytor(object):
             raise JenereytorInvalidTextException('Empty text')
         
         googleParam = {'chs':'%sx%s' % (width,height), 'cht':'qr', 'chl':text}
-        completeGoogleUrl = self.googleUrl + urllib.urlencode(googleParam)
+        completeGoogleUrl = self.googleUrl + urllib.parse.urlencode(googleParam)
         
         try:
-            response = urllib2.urlopen(completeGoogleUrl)
+            response = urllib.request.urlopen(completeGoogleUrl)
             
             if re.match(response.headers['Content-Type'], 'image/png'):
                 
